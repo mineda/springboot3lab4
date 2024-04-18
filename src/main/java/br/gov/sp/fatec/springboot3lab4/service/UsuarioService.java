@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -24,10 +25,12 @@ public class UsuarioService {
     @Autowired
     private AutorizacaoRepository autRepo;
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public List<Usuario> buscarTodos() {
         return usuarioRepo.findAll();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     public Usuario novo(Usuario usuario) {
         if(usuario == null ||
                 usuario.getNome() == null ||
@@ -48,6 +51,7 @@ public class UsuarioService {
         return usuarioRepo.save(usuario);
     }
 
+    @PreAuthorize("isAuthenticated()")
     public Autorizacao buscarAutorizacaoPorId(Long id) {
         Optional<Autorizacao> autOp = autRepo.findById(id);
         if(autOp.isEmpty()) {
