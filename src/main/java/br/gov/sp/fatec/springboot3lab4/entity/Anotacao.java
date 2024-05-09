@@ -2,6 +2,8 @@ package br.gov.sp.fatec.springboot3lab4.entity;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,13 +23,16 @@ public class Anotacao {
     private Long id;
 
     @Column(name = "ant_texto")
+    @JsonView({Views.AnotacaoTexto.class, Views.AnotacaoComUsuario.class})
     private String texto;
 
     @Column(name = "ant_data_hora")
+    @JsonView(Views.AnotacaoComUsuario.class)
     private LocalDateTime dataHora;
 
     @ManyToOne
     @JoinColumn(name = "ant_usr_id")
+    @JsonView(Views.AnotacaoComUsuario.class)
     private Usuario usuario;
 
     public Long getId() {
