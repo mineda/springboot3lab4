@@ -42,6 +42,24 @@ create table ant_anotacao (
   foreign key ant_usr_fk (ant_usr_id) references usr_usuario(usr_id)
 );
 
+create table bal_balanco (
+  bal_id bigint unsigned not null auto_increment,
+  bal_desc varchar(256) not null,
+  bal_data_hora datetime not null,
+  bal_valor_unitario numeric(10,2) not null,
+  bal_quantidade int not null,
+  primary key (bal_id)
+);
+
+create table enc_encomenda (
+  enc_rastreio bigint unsigned not null auto_increment,
+  enc_conteudo varchar(256) not null,
+  enc_valor_declarado numeric(10,2),
+  enc_data_hora_prevista datetime not null,
+  enc_data_hora_entrega datetime,
+  primary key (enc_rastreio)
+);
+
 insert into usr_usuario (usr_nome, usr_senha)
   values ('admin', '$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C');
 insert into aut_autorizacao (aut_nome)
@@ -50,3 +68,13 @@ insert into uau_usuario_autorizacao (usr_id, aut_id)
   values (1, 1);
 insert into ant_anotacao(ant_texto, ant_data_hora, ant_usr_id)
   values('Meu novo projeto', '2023-08-01 19:10', 1);
+insert into bal_balanco(bal_desc, bal_data_hora, bal_valor_unitario, bal_quantidade)
+  values('Supermercado', '2024-03-16 10:25', -221.45, 2);
+insert into bal_balanco(bal_desc, bal_data_hora, bal_valor_unitario, bal_quantidade)
+  values('Salário', '2024-03-18 07:00', 4230.70, 1);
+insert into enc_encomenda(enc_conteudo, enc_valor_declarado, enc_data_hora_prevista, enc_data_hora_entrega)
+  values('Nintendo Switch', 1850.00, '2024-06-10 19:00', null);
+insert into enc_encomenda(enc_conteudo, enc_data_hora_prevista, enc_data_hora_entrega)
+  values('Sabonete Líquido', '2024-05-25 10:00', '2024-05-27 12:00');
+insert into enc_encomenda(enc_conteudo, enc_data_hora_prevista, enc_data_hora_entrega)
+  values('Refrigerante', '2024-05-26 11:00', '2024-05-24 10:30');
