@@ -60,6 +60,16 @@ create table enc_encomenda (
   primary key (enc_rastreio)
 );
 
+create table pro_produto (
+  pro_id bigint unsigned not null auto_increment,
+  pro_nome varchar(256) not null,
+  pro_data_hora datetime not null,
+  pro_valor numeric(10,2) not null,
+  pro_valor_minimo numeric(10,2),
+  pro_valor_maximo numeric(10,2),
+  primary key (pro_id)
+);
+
 insert into usr_usuario (usr_nome, usr_senha)
   values ('admin', '$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C');
 insert into aut_autorizacao (aut_nome)
@@ -78,3 +88,7 @@ insert into enc_encomenda(enc_conteudo, enc_data_hora_prevista, enc_data_hora_en
   values('Sabonete Líquido', '2024-05-25 10:00', '2024-05-27 12:00');
 insert into enc_encomenda(enc_conteudo, enc_data_hora_prevista, enc_data_hora_entrega)
   values('Refrigerante', '2024-05-26 11:00', '2024-05-24 10:30');
+insert into pro_produto(pro_nome, pro_data_hora, pro_valor, pro_valor_minimo, pro_valor_maximo)
+  values('Sapato', '2024-05-26 11:00', 22.1, 17.8, 23.6);
+insert into pro_produto(pro_nome, pro_data_hora, pro_valor, pro_valor_minimo, pro_valor_maximo)
+  values('Pente', '2024-05-26 12:00', 27.1, 17.8, 22.6);
